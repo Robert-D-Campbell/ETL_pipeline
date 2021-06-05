@@ -1,0 +1,42 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "qtJQvyJVBraJ5DAARsc7wbLu9aQ=",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "postgres": {
+    "client": "pg",
+    "connection": "postgres://postgres:Fucku78952!@localhost:5432/asp_backup",
+    "migrations": {
+      "directory": "../database/migrations",
+      "tableName": "knex_migrations"
+    },
+    "seeds": {
+      "directory": "../database/seeds"
+    }
+  }
+}
