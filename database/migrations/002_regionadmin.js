@@ -29,7 +29,7 @@ exports.up = async function(knex) {
       });
     });
     //remove shop_id from REGION_ADMIN
-    regionAdmins.forEach(async admin => {
+    regionAdmins.forEach(async () => {
       await knex('users_tracsuser')
         .whereNotNull('shop_id')
         .update({
