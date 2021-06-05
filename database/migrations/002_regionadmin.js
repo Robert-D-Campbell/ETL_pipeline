@@ -1,7 +1,7 @@
 
 exports.up = async function(knex) {
-  const addRegionsToUsers = async () => {
-    const regionAdmins = await knex('users_tracsuser')
+  const addRegionIdToUsers = async () => {
+    const regionAdminIds = await knex('users_tracsuser')
       .where({permissions: 'REGION_ADMIN'})
       .select('id')
       .then(data => 
@@ -12,12 +12,12 @@ exports.up = async function(knex) {
     const usersRegions = await knex
       .select('tracsuser_id', 'region_id')
       .from('users_tracsuser_regions')
-      .whereIn('tracsuser_id', regionAdmins);
+      .whereIn('tracsuser_id', regionAdminIds);
 
     // add region_id to users WITH permissions = 'REGION_ADMIN'
-    regionAdmins.forEach(admin => {
+    regionAdminIds.forEach(adminId => {
       usersRegions.forEach(async data => {
-        if (admin === data.tracsuser_id) {
+        if (adminId === data.tracsuser_id) {
           await knex('users_tracsuser')
             .where({id: data.tracsuser_id})
             .update({
@@ -29,7 +29,7 @@ exports.up = async function(knex) {
       });
     });
     //remove shop_id from REGION_ADMIN
-    regionAdmins.forEach(async () => {
+    regionAdminIds.forEach(async () => {
       await knex('users_tracsuser')
         .whereNotNull('shop_id')
         .update({
@@ -38,7 +38,7 @@ exports.up = async function(knex) {
     });
     
   };  
-  await addRegionsToUsers();
+  await addRegionIdToUsers();
 };
   
 exports.down = async function (knex) {
