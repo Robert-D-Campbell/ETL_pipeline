@@ -8,16 +8,11 @@ exports.up = async function(knex) {
         data.map(datum => 
           datum.id
         ));
-            
-    console.log('SHOP IDS', shopIds);
-
     const shopsRegions = await knex
       .select('shop_id', 'region_id')
       .from('shops_shop_regions')
       .whereIn('shop_id', shopIds);
-    console.log('SHOPS AND REGIONS', shopsRegions);
-  
-    // add region_id to shops
+
     shopIds.forEach(shopId => {
       shopsRegions.forEach(async data => {
         if (shopId === data.shop_id) {
@@ -31,11 +26,9 @@ exports.up = async function(knex) {
         }
       });
     });
-      
   };  
   await addRegionIdToShops();
 };
-    
 exports.down = async function (knex) {
 };
     
