@@ -1,18 +1,23 @@
 exports.up = async function(knex) {
-    return knex.schema.table('products_product', (table) => {
-      table.renameColumn('ownerType', 'type');
-      table.renameColumn('cost', 'costPrice');
-      table.dropColumn('cost_currency');
-      table.dropColumn('listPrice_currency');
-      table.dropColumn('status');
-      table.dropColumn('permissions');
-      table.dropColumn('updatedBy_id');
-      table.dropColumn('productType');
-      table.dropColumn('oldId');
-      table.dropColumn('region_id');
-    });
-  };
+  return knex.schema.table('invoices_invoice', (table) => {
+    table.float('costPriceTotal');
+    table.float('ccc1InvoiceId');
+    table.renameColumn('invoiceNo', 'invoiceNumber');
+    table.renameColumn('ro', 'roNumber');
+    table.renameColumn('total', 'listPriceTotal');
+    table.renameColumn('user_id', 'createdFor_id');
+    table.renameColumn('ccc1', 'ccc1Exported');
+    table.dropColumn('status');
+    table.dropColumn('permissions');
+    table.dropColumn('updatedBy_id');
+    table.dropColumn('total_currency');
+  });
+};
       
-  exports.down = async function (knex) {
-  };
+exports.down = async function (knex) {
+  // return knex.schema.table('invoice_invoice', (table) => {
+  //   table.dropColumn('costPriceTotal');
+  //   table.dropColumn('ccc1InvoiceId');
+  // });
+};
       
