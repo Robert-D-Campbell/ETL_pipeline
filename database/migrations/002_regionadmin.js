@@ -25,6 +25,9 @@ exports.up = async function(knex) {
     regionAdminIds.forEach(async () => {
       await knex('users_tracsuser')
         .whereNotNull('shop_id')
+        .andWhere({
+          permissions: 'REGION_ADMIN'
+        })
         .update({
           shop_id: null,
         });
