@@ -46,21 +46,6 @@ exports.up = async function(knex) {
         }
       });
     });
-
-    // shopIds.forEach(shopId => {
-    //   shopsRegions.forEach(async data => {
-    //     if (shopId === data.shop_id) {
-    //       await knex('shops_shop')
-    //         .where({id: data.shop_id})
-    //         .update({
-    //           region_id: data.region_id,
-    //         });
-    //     } else { 
-    //       return;
-    //     }
-    //   });
-    // });
- 
   
   };
   await sanitizeInvoices();
