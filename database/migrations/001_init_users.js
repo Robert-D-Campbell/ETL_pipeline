@@ -26,7 +26,4 @@ exports.up = async function(knex) {
 };
 
 exports.down = async function (knex) {
-  return knex.schema.table('users_tracsuser', (table) => {
-    table.dropColumn('region_id');
-  });
 };
