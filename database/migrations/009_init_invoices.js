@@ -8,6 +8,7 @@ exports.up = async function(knex) {
     table.renameColumn('user_id', 'createdFor_id');
     table.renameColumn('ccc1', 'ccc1Exported');
     table.dropColumn('status');
+    table.dropColumn('oldId');
     table.dropColumn('permissions');
     table.dropColumn('updatedBy_id');
     table.dropColumn('total_currency');

@@ -8,7 +8,6 @@ exports.up = async function(knex) {
         data.map(datum => 
           datum
         ));
-    // console.log('rowInvoiceIds', rowInvoices);
         
     const invoices = await knex
       .select('id', 'costPriceTotal', 'listPriceTotal')
@@ -17,7 +16,6 @@ exports.up = async function(knex) {
         data.map(datum => 
           datum
         ));
-    // console.log('invoiceIds', invoices)
 
 
     invoices.forEach(invoice => {
