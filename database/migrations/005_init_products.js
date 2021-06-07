@@ -1,4 +1,3 @@
-
 exports.up = async function(knex) {
   return knex.schema.table('products_product', (table) => {
     table.renameColumn('ownerType', 'type');

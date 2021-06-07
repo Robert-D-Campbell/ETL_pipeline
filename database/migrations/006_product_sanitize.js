@@ -1,4 +1,3 @@
-
 exports.up = async function(knex) {
   const sanitizeProducts = async () => {
     await knex

@@ -1,4 +1,3 @@
-
 exports.up = async function(knex) {
   return knex.schema.table('users_tracsuser', (table) => {
     table.uuid('region_id')

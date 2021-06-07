@@ -1,4 +1,3 @@
-
 exports.up = async function(knex) {
   const addRegionIdToShops = async () => {
     const shopIds = await knex
