@@ -2,7 +2,7 @@ exports.up = async function(knex) {
   const addRegionIdToShops = async () => {
     const shopIds = await knex
       .select('id')
-      .from('shops_shop')
+      .from('shops')
       .then(data => 
         data.map(datum => 
           datum.id
@@ -15,13 +15,11 @@ exports.up = async function(knex) {
     shopIds.forEach(shopId => {
       shopsRegions.forEach(async data => {
         if (shopId === data.shop_id) {
-          await knex('shops_shop')
+          await knex('shops')
             .where({id: data.shop_id})
             .update({
               region_id: data.region_id,
             });
-        } else { 
-          return;
         }
       });
     });

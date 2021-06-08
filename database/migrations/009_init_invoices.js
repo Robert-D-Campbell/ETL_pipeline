@@ -1,6 +1,6 @@
 exports.up = async function(knex) {
-  return knex.schema.table('invoices_invoice', (table) => {
-    table.float('costPriceTotal');
+  await knex.schema.renameTable('invoices_invoice', 'invoices');
+  await knex.schema.table('invoices', (table) => {
     table.float('ccc1InvoiceId');
     table.renameColumn('invoiceNo', 'invoiceNumber');
     table.renameColumn('ro', 'roNumber');
@@ -12,6 +12,10 @@ exports.up = async function(knex) {
     table.dropColumn('permissions');
     table.dropColumn('updatedBy_id');
     table.dropColumn('total_currency');
+  });
+  await knex.schema.alterTable('invoices', async (table) => {
+    table.decimal('costPriceTotal', 16, 4);
+    table.decimal('listPriceTotal', 16, 4).alter();
   });
 };
       

@@ -1,5 +1,6 @@
 exports.up = async function(knex) {
-  return knex.schema.table('shops_shop', (table) => {
+  await knex.schema.renameTable('shops_shop', 'shops');
+  return knex.schema.table('shops', (table) => {
     table.uuid('region_id')
       .references('id')
       .inTable('regions_region')

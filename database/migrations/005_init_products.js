@@ -1,5 +1,6 @@
 exports.up = async function(knex) {
-  return knex.schema.table('products_product', (table) => {
+  await knex.schema.renameTable('products_product', 'products');
+  return knex.schema.table('products', (table) => {
     table.renameColumn('ownerType', 'type');
     table.renameColumn('cost', 'costPrice');
     table.dropColumn('cost_currency');

@@ -1,6 +1,6 @@
 exports.up = async function(knex) {
   const addRegionIdToUsers = async () => {
-    const regionAdminIds = await knex('users_tracsuser')
+    const regionAdminIds = await knex('users')
       .where({permissions: 'REGION_ADMIN'})
       .select('id')
       .then(data => 
@@ -14,7 +14,7 @@ exports.up = async function(knex) {
     regionAdminIds.forEach(adminId => {
       usersRegions.forEach(async data => {
         if (adminId === data.tracsuser_id) {
-          await knex('users_tracsuser')
+          await knex('users')
             .where({id: data.tracsuser_id})
             .update({
               region_id: data.region_id,
@@ -23,7 +23,7 @@ exports.up = async function(knex) {
       });
     });
     regionAdminIds.forEach(async () => {
-      await knex('users_tracsuser')
+      await knex('users')
         .whereNotNull('shop_id')
         .andWhere({
           permissions: 'REGION_ADMIN'

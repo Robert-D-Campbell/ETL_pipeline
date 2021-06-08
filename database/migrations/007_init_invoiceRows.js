@@ -1,5 +1,6 @@
 exports.up = async function(knex) {
-  return knex.schema.table('invoices_invoicerow', (table) => {
+  await knex.schema.renameTable('invoices_invoicerow', 'invoice_rows');
+  await knex.schema.table('invoice_rows', (table) => {
     table.renameColumn('productList', 'listPrice');
     table.renameColumn('productCost', 'costPrice');
     table.renameColumn('productName', 'name');
@@ -11,6 +12,10 @@ exports.up = async function(knex) {
     table.dropColumn('permissions');
     table.dropColumn('updatedBy_id');
     table.dropColumn('oldId');
+  });
+  await knex.schema.alterTable('invoice_rows', async (table) => {
+    table.decimal('listPrice', 16, 4).alter();
+    table.decimal('costPrice', 16, 4).alter();
   });
 };
         
